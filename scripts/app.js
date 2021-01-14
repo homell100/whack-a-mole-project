@@ -1,27 +1,17 @@
-setTimeout(function(){console.log("Hi")}, 10000)
-
 $(document).ready(function(){
+    $(".mole").click(STATUS.addScore),
     $("button").click(function(){
-        startGame()
+        STATUS.startPlaying()
+        DOM.reset()
+        play()
     })
 })
 
-function startGame(){
-
-    STATUS.startPlaying()
-    DOM.reset()
-    setTimeout(STATUS.stopPlaying, CONFIG.MAX_TIME*1000)
-    while(STATUS.getState() == "RUNNING"){
-        console.log(STATUS.getState())
-
-        STATUS.setMole()
-        //Show the mole
-        DOM.showMole(STATUS.numMole)
-        //Retreat mole
-        setTimeout(DOM.hideMole, CONFIG.HIDE_SPEED, STATUS.numMole)
-
-        //If clicked, add a point, remove listener and retreat Mole
-        
-    }
-    
+function play(){
+    STATUS.setMole()
+    DOM.showMole(STATUS.numMole)
+    setTimeout(function(){
+        DOM.hideMole(STATUS.numMole)
+        if(!STATUS.timeUp()) play()
+    }, CONFIG.HIDE_SPEED*1000)
 }

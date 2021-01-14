@@ -2,14 +2,10 @@ const STATUS ={
     state: "STOP",
     score: 0,
     timer: 0,
-    numMole: -1,
     startPlaying: function(){
         this.state = "RUNNING",
         this.score = 0,
-        this.timer = CONFIG.MAX_TIME
-    },
-    stopPlaying: function(){
-        this.state = "STOP"
+        this.startingTime = new Date()
     },
     getState: function(){
         return this.state
@@ -18,10 +14,16 @@ const STATUS ={
         this.score = 0
     },
     addScore: function(){
-        this.score++
+        console.log(this.score) 
+        console.log(STATUS.getScore())
+        this.score = this.score + 1
+
     },
     getScore: function(){
         return this.score
+    },
+    timeUp: function(){    
+        return ((new Date()).getTime() - this.startingTime.getTime())/1000>CONFIG.MAX_TIME 
     },
     setMole: function(){
         this.numMole = UTILITIES.rndNum()
