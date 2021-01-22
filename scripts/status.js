@@ -1,23 +1,17 @@
 const STATUS ={
-    state: "STOP",
     score: 0,
     timer: 0,
+    mole: {
+        num:-1,
+        hasBeenClicked: false
+    },
+    timers: [],
     startPlaying: function(){
-        this.state = "RUNNING",
-        this.score = 0,
         this.startingTime = new Date()
-    },
-    getState: function(){
-        return this.state
-    },
-    resetScore: function(){
         this.score = 0
     },
     addScore: function(){
-        console.log(this.score) 
-        console.log(STATUS.getScore())
         this.score = this.score + 1
-
     },
     getScore: function(){
         return this.score
@@ -26,9 +20,22 @@ const STATUS ={
         return ((new Date()).getTime() - this.startingTime.getTime())/1000>CONFIG.MAX_TIME 
     },
     setMole: function(){
-        this.numMole = UTILITIES.rndNum()
+        this.mole.num = UTILITIES.rndNum()
     },
-    getMole: function(){
-        return this.numMole
+    getMoleNum: function(){
+        return this.mole.num
+    },
+    setMoleClick: function(a){
+        this.mole.hasBeenClicked = a
+    },
+    getMoleClick: function(){
+        return this.mole.hasBeenClicked
+    },
+    clearTimeouts: function(){
+        for(var i=0; i<this.timers.length; i++){
+            console.log("cleared")
+            clearTimeout(this.timers[i])
+        }
     }
+
 }
