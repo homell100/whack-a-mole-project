@@ -1,22 +1,22 @@
 const DOM = {
-    updateScore: function(){
-        $(".score").text(STATUS.getScore())
+    //Updates the score
+    updateScore: function(score){
+        $(".score").text(score)
     },
-    getMoleDiv: function(num){
-        return $(`.game div:nth-of-type(${moleNum}) .mole`)
+    //Returns the nth mole
+    getMoleDiv: function(n){
+        return $(`.game div:nth-of-type(${n}) .mole`)
     },
-    showMole: function(a){
-        $(`.game div:nth-of-type(${a})`).addClass("up")
+    //Shows the nth mole
+    showMole: function(n){
+        $(`.game div:nth-of-type(${n})`).addClass("up")
     },
-    hideMole: function(a){
-        $(`.game div:nth-of-type(${a})`).removeClass("up")
+    //Hides the nth mole
+    hideMole: function(n){
+        $(`.game div:nth-of-type(${n})`).removeClass("up")
     },
+    //Hide all moles
     hideAllMoles: function(){
         $(".hole").removeClass("up")
-    },
-    reset: function(){
-        //Reset score
-        this.updateScore()
-        this.hideAllMoles()
     }
 }
